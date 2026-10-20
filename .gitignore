@@ -12,6 +12,7 @@ dist
 dist-ssr
 win-unpacked
 # release
+release
 *.local
 
 # Editor directories and files
