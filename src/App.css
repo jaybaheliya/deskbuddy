@@ -1,0 +1,1315 @@
+/* DeskBuddy Master Stylesheet */
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* Base Acrylic Container for Panel Window */
+.panel-app-container {
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 14px;
+  overflow: hidden;
+  color: #f1f5f9;
+  background: linear-gradient(160deg, #131c31 0%, #0c1222 55%, #18152e 100%);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  user-select: none;
+}
+
+/* Window Title Bar */
+.window-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 32px;
+  -webkit-app-region: drag;
+  padding: 0 4px;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-spark {
+  color: #38bdf8;
+  font-size: 16px;
+  animation: pulse-spark 2.5s infinite ease-in-out;
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #e0f2fe, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+  -webkit-app-region: no-drag;
+}
+
+.win-btn {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.win-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.win-btn-close:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Navigation Tabs */
+.tab-navigation {
+  display: flex;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 3px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  -webkit-app-region: no-drag;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 7px 4px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.18s ease;
+}
+
+.tab-btn:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.is-active {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Main Content Area */
+.tab-content-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  -webkit-app-region: no-drag;
+}
+
+.tab-content-area::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tab-content-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* Companion Display Stage (Panel View) */
+.stage-card {
+  background: radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.4) 75%);
+  border-radius: 18px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-stars {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  color: rgba(56, 189, 248, 0.4);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   PIXAR ROBOT STYLING & GPU ANIMATIONS
+   ========================================================================== */
+
+.pixar-robot-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  -webkit-app-region: drag;
+  user-select: none;
+  transform: translateZ(0);
+}
+
+.robot-flip-wrapper {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateZ(0);
+}
+
+.robot-flip-wrapper.flip-left {
+  transform: scaleX(-1);
+}
+
+.pixar-robot-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Pixar Hover Breathing Bob */
+.pixar-rig {
+  transform-origin: 90px 200px;
+  animation: pixar-hover-bob 3.2s infinite ease-in-out;
+}
+
+@keyframes pixar-hover-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Pixar Walk Bounce */
+.pixar-rig.rig-walking {
+  animation: pixar-walk-bounce 0.45s infinite alternate ease-in-out !important;
+}
+
+@keyframes pixar-walk-bounce {
+  0% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+/* Pixar Magnetic Stepping Boots */
+.anim-walk-foot-left {
+  transform-origin: 64px 186px;
+  animation: pixar-step-left 0.45s infinite alternate ease-in-out;
+}
+
+@keyframes pixar-step-left {
+  0% {
+    transform: translateY(0) scale(0.95);
+  }
+  100% {
+    transform: translateY(-6px) scale(1.05);
+  }
+}
+
+.anim-walk-foot-right {
+  transform-origin: 116px 186px;
+  animation: pixar-step-right 0.45s infinite alternate ease-in-out;
+}
+
+@keyframes pixar-step-right {
+  0% {
+    transform: translateY(-6px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(0.95);
+  }
+}
+
+/* Pixar Water Flask Drinking Animation */
+.pixar-water-bottle {
+  transform-origin: 10px 10px;
+  animation: pixar-flask-tilt 2.2s infinite ease-in-out;
+}
+
+@keyframes pixar-flask-tilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30%, 75% {
+    transform: rotate(-30deg);
+  }
+}
+
+/* Pixar OLED Eye Blink */
+.pixar-eye-blink {
+  transform-origin: 90px 64px;
+  animation: pixar-blink 4s infinite;
+}
+
+@keyframes pixar-blink {
+  0%, 93%, 97%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+/* Pixar Antenna & Core Pulses */
+.antenna-pulse {
+  animation: ant-glow 2s infinite alternate ease-in-out;
+}
+
+@keyframes ant-glow {
+  0% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #00f2fe);
+  }
+}
+
+.pixar-core-pulse {
+  animation: core-glow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes core-glow {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px #38bdf8);
+  }
+}
+
+/* ==========================================================================
+   MASCOT SKELETON & ANIMATIONS
+   ========================================================================== */
+
+.mascot-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  -webkit-app-region: drag;
+}
+
+.mascot-flip-wrapper {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mascot-flip-wrapper.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.mascot-svg-el {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Ground shadow pulse */
+.mascot-ground-ellipse {
+  transform-origin: 85px 196px;
+  transition: all 0.3s ease;
+}
+
+/* Idle Bobbing */
+.mascot-rig {
+  transform-origin: 85px 196px;
+  animation: rig-idle-breath 3.5s infinite ease-in-out;
+}
+
+@keyframes rig-idle-breath {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Walking Cycle Rig Bobbing */
+.rig-walking {
+  animation: rig-walk-bounce 0.48s infinite alternate ease-in-out !important;
+}
+
+@keyframes rig-walk-bounce {
+  0% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+}
+
+/* Leg Walk Alternating Strides */
+.anim-walk-leg-left {
+  transform-origin: 65px 148px;
+  animation: walk-leg-left 0.48s infinite alternate ease-in-out;
+}
+
+@keyframes walk-leg-left {
+  0% {
+    transform: rotate(-24deg) translateY(-2px);
+  }
+  100% {
+    transform: rotate(24deg) translateY(0);
+  }
+}
+
+.anim-walk-leg-right {
+  transform-origin: 105px 148px;
+  animation: walk-leg-right 0.48s infinite alternate ease-in-out;
+}
+
+@keyframes walk-leg-right {
+  0% {
+    transform: rotate(24deg) translateY(0);
+  }
+  100% {
+    transform: rotate(-24deg) translateY(-2px);
+  }
+}
+
+/* Arm Walk Alternating Swings */
+.anim-walk-arm-left {
+  transform-origin: 36px 110px;
+  animation: walk-arm-left 0.48s infinite alternate ease-in-out;
+}
+
+@keyframes walk-arm-left {
+  0% {
+    transform: rotate(26deg);
+  }
+  100% {
+    transform: rotate(-24deg);
+  }
+}
+
+.anim-walk-arm-right {
+  transform-origin: 134px 110px;
+  animation: walk-arm-right 0.48s infinite alternate ease-in-out;
+}
+
+@keyframes walk-arm-right {
+  0% {
+    transform: rotate(-24deg);
+  }
+  100% {
+    transform: rotate(26deg);
+  }
+}
+
+/* ==========================================================================
+   DRINKING WATER ANIMATION
+   ========================================================================== */
+
+.anim-drinking-arm {
+  transform-origin: 134px 110px;
+  animation: drink-arm-raise 2s infinite ease-in-out;
+}
+
+@keyframes drink-arm-raise {
+  0%, 100% {
+    transform: rotate(-10deg) translate(0, 0);
+  }
+  30%, 70% {
+    /* Raising bottle up to mouth */
+    transform: rotate(-65deg) translate(-14px, -24px);
+  }
+}
+
+.anim-drink-head {
+  animation: drink-head-tilt 2s infinite ease-in-out;
+}
+
+@keyframes drink-head-tilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  35%, 65% {
+    /* Tilting head back gently as water sips */
+    transform: rotate(4deg) translateY(-2px);
+  }
+}
+
+.bottle-drinking {
+  transform-origin: 10px 10px;
+  animation: bottle-tilt 2s infinite ease-in-out;
+}
+
+@keyframes bottle-tilt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  30%, 70% {
+    transform: rotate(-35deg);
+  }
+}
+
+.fx-water-drop-1 {
+  animation: float-drop 1.4s infinite ease-in;
+}
+
+.fx-water-drop-2 {
+  animation: float-drop 1.4s 0.4s infinite ease-in;
+}
+
+.fx-water-drop-3 {
+  animation: float-drop 1.4s 0.8s infinite ease-in;
+}
+
+@keyframes float-drop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   STRETCHING ANIMATION
+   ========================================================================== */
+
+.anim-stretch-arm-left {
+  transform-origin: 36px 110px;
+  animation: stretch-arm-l 2.6s infinite ease-in-out;
+}
+
+@keyframes stretch-arm-l {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  40%, 75% {
+    /* Reaching straight up overhead */
+    transform: rotate(-135deg) translate(8px, -18px);
+  }
+}
+
+.anim-stretch-arm-right {
+  transform-origin: 134px 110px;
+  animation: stretch-arm-r 2.6s infinite ease-in-out;
+}
+
+@keyframes stretch-arm-r {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  40%, 75% {
+    /* Reaching straight up overhead */
+    transform: rotate(135deg) translate(-8px, -18px);
+  }
+}
+
+.fx-sparkle-l {
+  animation: sparkle-pulse 1.3s infinite alternate ease-in-out;
+}
+
+.fx-sparkle-r {
+  animation: sparkle-pulse 1.3s 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes sparkle-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ==========================================================================
+   RESTING EYES ANIMATION
+   ========================================================================== */
+
+.fx-zzz-1 {
+  animation: float-zzz 2s infinite ease-out;
+}
+
+.fx-zzz-2 {
+  animation: float-zzz 2s 0.7s infinite ease-out;
+}
+
+@keyframes float-zzz {
+  0% {
+    transform: translate(0, 0) scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(12px, -18px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   CELEBRATING ANIMATION
+   ========================================================================== */
+
+.rig-celebrating {
+  animation: celebration-jump 0.6s infinite alternate ease-in-out !important;
+}
+
+@keyframes celebration-jump {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-16px) scale(1.05);
+  }
+}
+
+.fx-star-1, .fx-star-2, .fx-star-3 {
+  animation: star-spin 1s infinite alternate ease-in-out;
+}
+
+@keyframes star-spin {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.2) rotate(25deg);
+  }
+}
+
+/* Blinking & Core Pulses */
+.anim-human-blink {
+  animation: human-blink 4.5s infinite;
+}
+
+@keyframes human-blink {
+  0%, 94%, 98%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+.anim-robot-eye-pulse {
+  animation: robot-eye-glow 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes robot-eye-glow {
+  0% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px #00f2fe);
+  }
+}
+
+.anim-core-pulse {
+  animation: core-reactor 2s infinite alternate ease-in-out;
+}
+
+@keyframes core-reactor {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px #38bdf8);
+  }
+}
+
+/* ==========================================================================
+   SPEECH BUBBLE COMPONENT
+   ========================================================================== */
+
+.speech-bubble {
+  position: relative;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 16px;
+  padding: 12px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.25s ease;
+  -webkit-app-region: no-drag;
+}
+
+.speech-bubble.has-reminder {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(8, 47, 73, 0.85));
+  box-shadow: 0 12px 30px rgba(14, 165, 233, 0.25);
+}
+
+.speech-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.speech-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #7dd3fc;
+  text-transform: uppercase;
+}
+
+.speech-icon {
+  font-size: 13px;
+}
+
+.speech-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #f8fafc;
+}
+
+.speech-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.action-btn {
+  border: 0;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-done {
+  background: linear-gradient(135deg, #2dd4bf, #059669);
+  color: #022c22;
+  flex: 1;
+}
+
+.btn-done:hover {
+  background: linear-gradient(135deg, #5eead4, #10b981);
+  transform: translateY(-1px);
+}
+
+.btn-snooze {
+  background: rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-snooze:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-dismiss {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 8px 10px;
+}
+
+.btn-dismiss:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================================================
+   REMINDERS & HABITS PANEL
+   ========================================================================== */
+
+.reminders-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reminders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title-group h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.subhead-text {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.pause-pill-btn {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pause-pill-btn:hover {
+  background: rgba(56, 189, 248, 0.25);
+}
+
+.pause-pill-btn.is-paused {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+}
+
+.reminders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reminder-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 10px 12px;
+  transition: all 0.2s ease;
+}
+
+.reminder-card.active {
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.reminder-card.disabled {
+  opacity: 0.55;
+}
+
+.reminder-main-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reminder-icon-badge {
+  font-size: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.reminder-title-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reminder-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.reminder-countdown {
+  font-size: 10px;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.reminder-interval-editor {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.interval-label {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.interval-select {
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.reminder-actions-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.test-ping-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  font-size: 9px;
+  border-radius: 4px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.test-ping-btn:hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: 0.25s;
+  border-radius: 20px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #38bdf8;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(16px);
+}
+
+/* ==========================================================================
+   STATS & WELLNESS PROGRESS PANEL
+   ========================================================================== */
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stats-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.stats-summary-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.summary-num {
+  font-size: 17px;
+  font-weight: 900;
+  color: #38bdf8;
+}
+
+.summary-label {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.summary-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat-pill {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-icon {
+  font-size: 20px;
+}
+
+.stat-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-count {
+  font-size: 15px;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+
+.stat-name {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.wellness-tip-box {
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tip-spark {
+  color: #2dd4bf;
+  font-size: 14px;
+}
+
+.tip-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #ccfbf1;
+}
+
+/* ==========================================================================
+   SETTINGS PANEL
+   ========================================================================== */
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.settings-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.settings-group {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #7dd3fc;
+  text-transform: uppercase;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.setting-label-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.setting-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.setting-desc {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.setting-select {
+  background: rgba(15, 23, 42, 0.85);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.time-range-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.time-range-picker input {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #f1f5f9;
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+.reset-defaults-btn {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reset-defaults-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ==========================================================================
+   FOOTER BAR
+   ========================================================================== */
+
+.app-footer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 4px 0;
+  font-size: 10px;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #2dd4bf;
+  font-weight: 600;
+}
+
+.footer-status.is-paused {
+  color: #fbbf24;
+}
+
+.status-dot {
+  font-size: 8px;
+}
+
+/* ==========================================================================
+   DEDICATED ROAMING MASCOT WINDOW VIEW (#mascot)
+   ========================================================================== */
+
+.roaming-mascot-view {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0 6px 4px 6px;
+  box-sizing: border-box;
+  background: transparent !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: visible;
+  user-select: none;
+}
+
+.roaming-speech-container {
+  width: 100%;
+  max-width: 270px;
+  margin-bottom: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.roaming-mascot-drag-target {
+  cursor: grab;
+  -webkit-app-region: drag;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 165px;
+}
+
+.roaming-mascot-drag-target:active {
+  cursor: grabbing;
+}
+
+/* Quick Preview Tray */
+.quick-test-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+.quick-label {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.quick-buttons-row {
+  display: flex;
+  gap: 5px;
+}
+
+.quick-pill-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 5px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-pill-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
